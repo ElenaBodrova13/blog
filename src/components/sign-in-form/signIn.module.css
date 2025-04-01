@@ -1,0 +1,85 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('../font/Roboto-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+.formConteiner {
+  width: 384px;
+  height: 374px;
+  background-color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  font-family: 'Roboto';
+  box-shadow: 2px 2px 5px gray;
+}
+.formConteiner h1 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 311px;
+  font-size: 20px;
+  text-align-last: center;
+  color: #262626;
+}
+.formInput {
+  display: flex;
+  flex-direction: column;
+}
+.formInput label {
+  display: flex;
+  margin-left: 32px;
+  margin-right: 32px;
+  flex-direction: column;
+  margin-top: 12px;
+}
+.formInput input {
+  height: 40px;
+  border-radius: 8px;
+
+  border: 1px solid #bfbfbf;
+}
+
+.label {
+  display: flex;
+  color: #262626;
+  font-family: 'Roboto';
+  font-size: 14px;
+}
+
+.btn {
+  border: 1px solid #dfe5ec;
+  display: block;
+  height: 40px;
+  width: 320px;
+  color: #4a4a4a;
+  font-size: medium;
+  background-color: #2196f3;
+  color: white;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.active {
+  background-color: #2196f3;
+  color: white;
+}
+
+.signIn {
+  margin-left: auto;
+  margin-right: auto;
+  width: 311px;
+  font-size: 12px;
+  text-align-last: center;
+  color: #8c8c8c;
+}
+.formData {
+  color: #bfbfbf;
+  font-size: 16px;
+  margin-top: 5px;
+  padding-left: 15px;
+}
+.btnWrapper {
+  margin-top: 20px;
+}

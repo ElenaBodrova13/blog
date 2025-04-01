@@ -1,0 +1,77 @@
+.header {
+  display: flex;
+  margin-right: 22px;
+  margin-left: 22px;
+  justify-content: space-between;
+
+  height: 80px;
+}
+.buttons {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.h1 {
+  font-size: 18px;
+  display: inline-block;
+  background-color: white;
+  border: none;
+  font-family: 'inter';
+}
+.btn {
+  border: 1px solid white;
+  display: block;
+  height: 51px;
+  width: 109px;
+  color: #4a4a4a;
+  font-size: medium;
+  background-color: white;
+  border-radius: 4px;
+}
+.btn:hover {
+  border-color: #52c41a;
+  color: #52c41a;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  text-decoration: none;
+  color: #52c41a;
+}
+.btnWrapper {
+  border-radius: 8px;
+}
+
+.active {
+  background-color: #2196f3;
+  color: white;
+}
+.btnWrapperAuthor {
+  display: flex;
+
+  align-self: center;
+}
+.btnAutor {
+  border: 1px solid #52c41a;
+  display: block;
+
+  font-size: medium;
+  background-color: white;
+  border-radius: 4px;
+  margin-right: 15px;
+  height: 31px;
+}
+.btnAutor a {
+  color: #52c41a;
+}
+.btnLogout {
+  border: 1px solid #000000bf;
+  display: block;
+  height: 51px;
+  width: 109px;
+  color: #4a4a4a;
+  font-size: medium;
+  background-color: white;
+  border-radius: 8px;
+}

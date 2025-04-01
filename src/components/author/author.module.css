@@ -1,0 +1,32 @@
+.conteinerTitle {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  justify-content: start;
+  padding-top: 15px;
+}
+
+.count {
+  padding-left: 5px;
+  margin-top: 0;
+}
+.title {
+  font-size: 20px;
+  margin-right: 13px;
+}
+.title a {
+  color: #366eff;
+}
+.tag {
+  height: 20px;
+  padding-left: 3px;
+  padding-right: 3px;
+  border: 1px solid #00000080;
+  color: #00000080;
+  text-align: center;
+
+  margin-right: 8px;
+}
+.tagConteiner {
+  display: flex;
+  flex-wrap: wrap;
+}
