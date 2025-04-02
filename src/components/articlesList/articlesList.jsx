@@ -19,6 +19,7 @@ function ArticlesList({
   useEffect(() => {
     getAllOfsetArticles()
   }, [])
+
   const elements = articles.map((a) => (
     <Articles
       title={a.title}
@@ -39,9 +40,14 @@ function ArticlesList({
     louder = <Loading />
   }
 
-  const mistake = error ? (
-    <Alert message="Что то пошло не совсем по плану" description={`Произошла ошибка: ${error.message}`} type="error" />
-  ) : null
+  const mistake =
+    articles.length < 1 && error ? (
+      <Alert
+        message="Что то пошло не совсем по плану"
+        description={`Произошла ошибка: ${error.message}`}
+        type="error"
+      />
+    ) : null
   return (
     <>
       {mistake}

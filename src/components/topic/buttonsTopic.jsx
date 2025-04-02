@@ -28,6 +28,8 @@ function ButtonsTopic({ articleDelete, currentSlug, ready, isReady, clickEditArt
     blockButtons = article.author.username !== user.username
   }
 
+  const clasDel = blockButtons ? s.dis : s.delete
+  const clasEdit = blockButtons ? s.dis : s.btn
   return (
     <div className={s.twoButtons}>
       <div className={s.btnWrapper}>
@@ -40,7 +42,7 @@ function ButtonsTopic({ articleDelete, currentSlug, ready, isReady, clickEditArt
           cancelText="No"
           placement="rightTop"
         >
-          <button className={s.delete} type="button" disabled={blockButtons}>
+          <button className={clasDel} type="button" disabled={blockButtons}>
             Delete
           </button>
         </Popconfirm>
@@ -49,7 +51,7 @@ function ButtonsTopic({ articleDelete, currentSlug, ready, isReady, clickEditArt
         <Link to={`/articles/${currentSlug}/edit`}>
           <button
             disabled={blockButtons}
-            className={s.btn}
+            className={clasEdit}
             type="button"
             onClick={() => {
               clickEditArticle()

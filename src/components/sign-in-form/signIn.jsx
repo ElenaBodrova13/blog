@@ -5,10 +5,11 @@ import { Link, Redirect } from 'react-router-dom/cjs/react-router-dom.min'
 
 import * as actions from '../../actions'
 import ErrorMessage from '../errorMessage'
+import AlertMessage from '../alertMassege'
 
 import s from './signIn.module.css'
 
-function SignIn({ logIn, currentUser }) {
+function SignIn({ logIn, currentUser, dellError }) {
   const {
     register,
     handleSubmit,
@@ -23,13 +24,23 @@ function SignIn({ logIn, currentUser }) {
   }
 
   if (currentUser) {
+    dellError()
     return <Redirect to="/" />
   }
+
   return (
     <div className={s.formConteiner}>
       <h1>Sign In</h1>
 
-      <form action="#" method="get" className={s.formInput} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        action="#"
+        method="get"
+        className={s.formInput}
+        onSubmit={handleSubmit(onSubmit)}
+        onChange={() => {
+          dellError()
+        }}
+      >
         <label htmlFor="email" className={s.labelData}>
           Email
           <input
@@ -73,6 +84,7 @@ function SignIn({ logIn, currentUser }) {
           Don’t have an account? <Link to="sign-up">Sign Up.</Link>
         </p>
       </form>
+      <AlertMessage />
     </div>
   )
 }

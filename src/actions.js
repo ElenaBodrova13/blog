@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 import FetchServise from './fetchServise'
 
 const f = new FetchServise()
@@ -34,6 +36,26 @@ export const reqTicketsError = (e) => ({
   payload: e,
 })
 
+export const dellError = () => ({
+  type: 'DEL_ERROR',
+})
+
+export const errWork = () => async (dispatch) => {
+  axios.interceptors.response.use(
+    (res) => res,
+    (err) => {
+      dispatch(reqTicketsError(err.response))
+      if (axios.isAxiosError(err)) {
+        console.log(err.response, 'err1')
+        console.log(err.response.data.errors, 'err2')
+      } else if (err instanceof Error) {
+        console.log(err.message)
+      }
+
+      return Promise.reject(err)
+    }
+  )
+}
 export const putSlug = (slug) => ({
   type: 'PUT_SLUG',
   payload: slug,
@@ -58,7 +80,8 @@ export const putCarrentUser = (user) => ({ type: 'PUT_CURRENT_USER', payload: us
 export const logIn = (dataUser) => async (dispatch) => {
   try {
     const response = await f.loginUser(dataUser)
-    if (response.status === 200) {
+    console.log(4, response)
+    if (response && response.status === 200) {
       dispatch(putCarrentUser(response.data.user))
     } else {
       if (response.status === 404) {
@@ -68,16 +91,23 @@ export const logIn = (dataUser) => async (dispatch) => {
       throw new Error(response.status)
     }
   } catch (e) {
-    console.error(`Произошла ошибка ${e.message}`)
-    dispatch(reqTicketsError(e))
+    dispatch(errWork())
   }
 }
 
 export const getToken = (dataUser) => async (dispatch) => {
   try {
     const response = await f.registrationUser(dataUser)
+
     if (response.status === 200) {
       dispatch(putCarrentUser(response.data.user))
+      const TOKEN = response.data.user.token
+
+      axios.interceptors.request.use((config) => {
+        axios.defaults.headers.common.Authorization = `Token ${TOKEN}`
+
+        return config
+      })
     } else {
       if (response.status === 404) {
         throw new Error('404, Not found')
@@ -87,7 +117,7 @@ export const getToken = (dataUser) => async (dispatch) => {
     }
   } catch (e) {
     console.error(`Произошла ошибка ${e.message}`)
-    dispatch(reqTicketsError(e))
+    dispatch(errWork())
   }
 }
 
@@ -108,7 +138,7 @@ export const getAllOfsetArticles = () => async (dispatch, getState) => {
     }
   } catch (e) {
     console.error(`Произошла ошибка ${e.message}`)
-    dispatch(reqTicketsError(e))
+    dispatch(errWork())
   }
 }
 
@@ -126,14 +156,14 @@ export const getArticle = () => async (dispatch, getState) => {
     }
   } catch (e) {
     console.error(`Произошла ошибка ${e.message}`)
-    dispatch(reqTicketsError(e))
+    dispatch(errWork())
   }
 }
 export const articleCreate = (article, slugId) => async (dispatch, getState) => {
   try {
-    const onEd = getState().onEdite
+    const onEd = getState().onEdit
 
-    const response = !onEd ? await f.createArticle(article) : f.editArticle(article, slugId)
+    const response = !onEd ? await f.createArticle(article) : await f.editArticle(article, slugId)
 
     if (response.status === 200) {
       dispatch(putCreatedSlug(response.data.article.slug))
@@ -145,8 +175,7 @@ export const articleCreate = (article, slugId) => async (dispatch, getState) => 
       throw new Error(response.status)
     }
   } catch (e) {
-    console.error(`Произошла ошибка ${e.message}`)
-    dispatch(reqTicketsError(e))
+    dispatch(errWork())
   }
 }
 
@@ -165,7 +194,7 @@ export const articleEdit = (article, slugId) => async (dispatch) => {
     }
   } catch (e) {
     console.error(`Произошла ошибка ${e.message}`)
-    dispatch(reqTicketsError(e))
+    dispatch(errWork())
   }
 }
 
@@ -184,7 +213,7 @@ export const articleDelete = (slug) => async (dispatch) => {
     }
   } catch (e) {
     console.error(`Произошла ошибка ${e.message}`)
-    dispatch(reqTicketsError(e))
+    dispatch(errWork())
   }
 }
 
@@ -203,7 +232,7 @@ export const getEditedProfile = () => async (dispatch) => {
     }
   } catch (e) {
     console.error(`Произошла ошибка ${e.message}`)
-    dispatch(reqTicketsError(e))
+    dispatch(errWork())
   }
 }
 
@@ -224,7 +253,7 @@ export const editProfile = (data) => async (dispatch) => {
     }
   } catch (e) {
     console.error(`Произошла ошибка ${e.message}`)
-    dispatch(reqTicketsError(e))
+    dispatch(errWork())
   }
 }
 
@@ -244,7 +273,7 @@ export const estimateArticle = (slug) => async (dispatch) => {
     }
   } catch (e) {
     console.error(`Произошла ошибка ${e.message}`)
-    dispatch(reqTicketsError(e))
+    dispatch(errWork())
   }
 }
 export const delHeart = (slug) => async (dispatch) => {
@@ -263,6 +292,6 @@ export const delHeart = (slug) => async (dispatch) => {
     }
   } catch (e) {
     console.error(`Произошла ошибка ${e.message}`)
-    dispatch(reqTicketsError(e))
+    dispatch(errWork())
   }
 }

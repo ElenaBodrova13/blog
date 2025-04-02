@@ -62,10 +62,13 @@ const rootReducer = (state = initialState, action = {}) => {
     case 'REQ_ERROR':
       return {
         ...state,
-
         error: action.payload,
       }
-
+    case 'DEL_ERROR':
+      return {
+        ...state,
+        error: null,
+      }
     default:
       return state
   }

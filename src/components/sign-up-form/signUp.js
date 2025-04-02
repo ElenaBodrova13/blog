@@ -5,17 +5,18 @@ import { Link, Redirect } from 'react-router-dom/cjs/react-router-dom.min'
 
 import * as actions from '../../actions'
 import ErrorMessage from '../errorMessage'
+import AlertMessage from '../alertMassege'
 
 import s from './signUp.module.css'
 
-function SignUp({ getToken, currentUser }) {
+function SignUp({ getToken, currentUser, dellError }) {
   const {
     register,
     handleSubmit,
     reset,
     watch,
 
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({ mode: 'onChange' })
   const user = {}
   function onSubmit(data) {
@@ -35,7 +36,13 @@ function SignUp({ getToken, currentUser }) {
     <div className={s.formConteiner}>
       <h1>Create new account</h1>
 
-      <form className={s.formInput} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={s.formInput}
+        onSubmit={handleSubmit(onSubmit)}
+        onChange={() => {
+          dellError()
+        }}
+      >
         <label htmlFor="name" className={s.labelData}>
           Username
           <input
@@ -127,7 +134,7 @@ function SignUp({ getToken, currentUser }) {
           </div>
 
           <div className={s.btnWrapper}>
-            <button id="fast" className={s.btn} type="submit" disabled={!isValid}>
+            <button id="fast" className={s.btn} type="submit">
               Create
             </button>
           </div>
@@ -136,6 +143,7 @@ function SignUp({ getToken, currentUser }) {
           </p>
         </div>
       </form>
+      <AlertMessage />
     </div>
   )
 }

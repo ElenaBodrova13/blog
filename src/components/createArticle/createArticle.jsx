@@ -19,7 +19,7 @@ function CreateArticle({ articleCreate, newSlug, delSlug, slugId, onEdit, oldArt
   } = useForm({
     mode: 'onChange',
     defaultValues: {
-      tags: [{ name: 'Tag' }],
+      tags: [{ name: ' ' }],
     },
   })
 
@@ -124,7 +124,7 @@ function CreateArticle({ articleCreate, newSlug, delSlug, slugId, onEdit, oldArt
               <button
                 type="button"
                 onClick={() => {
-                  append({ name: 'tag' })
+                  append({ name: '' })
                 }}
               >
                 Add tag

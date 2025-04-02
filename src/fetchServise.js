@@ -3,26 +3,19 @@ import axios from 'axios'
 const BASE_TOKEN = JSON.parse(window.sessionStorage.getItem('currentUser'))
   ? `Token ${JSON.parse(window.sessionStorage.getItem('currentUser')).token}`
   : null
+
 const BASE_URL_API = 'https://blog-platform.kata.academy/api/'
 axios.defaults.baseURL = BASE_URL_API
+
 axios.defaults.headers.common = {
   'Content-Type': 'application/json;charset=utf-8',
   Authorization: BASE_TOKEN,
 }
-axios.interceptors.response.use(
-  (res) => res,
-  (err) => {
-    if (axios.isAxiosError(err)) {
-      console.log(err, 'err')
-      console.log(err.response?.data.errText, 'error')
-    } else if (err instanceof Error) {
-      console.log(err.message)
-    }
-  }
-)
+
 export default class FetchServise {
   registrationUser = async (user) => {
     const res = await axios.post('users', { user })
+
     return res
   }
 

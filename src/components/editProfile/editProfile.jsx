@@ -5,10 +5,11 @@ import { Redirect } from 'react-router-dom/cjs/react-router-dom.min'
 
 import * as actions from '../../actions'
 import ErrorMessage from '../errorMessage'
+import AlertMessage from '../alertMassege'
 
 import s from './editProfile.module.css'
 
-function EditProfile({ editProfile, ready, isReady }) {
+function EditProfile({ editProfile, ready, isReady, dellError }) {
   const {
     register,
     handleSubmit,
@@ -35,6 +36,7 @@ function EditProfile({ editProfile, ready, isReady }) {
   }
 
   if (ready) {
+    dellError()
     isReady()
     return <Redirect to="/" />
   }
@@ -43,7 +45,13 @@ function EditProfile({ editProfile, ready, isReady }) {
     <div className={s.formConteiner}>
       <h1>Edit Profile</h1>
 
-      <form className={s.formInput} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={s.formInput}
+        onSubmit={handleSubmit(onSubmit)}
+        onChange={() => {
+          dellError()
+        }}
+      >
         <label htmlFor="name" className={s.labelData}>
           Username
           <input
@@ -125,6 +133,7 @@ function EditProfile({ editProfile, ready, isReady }) {
           </div>
         </div>
       </form>
+      <AlertMessage />
     </div>
   )
 }
