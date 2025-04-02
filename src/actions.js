@@ -80,7 +80,7 @@ export const putCarrentUser = (user) => ({ type: 'PUT_CURRENT_USER', payload: us
 export const logIn = (dataUser) => async (dispatch) => {
   try {
     const response = await f.loginUser(dataUser)
-    console.log(4, response)
+
     if (response && response.status === 200) {
       dispatch(putCarrentUser(response.data.user))
     } else {
@@ -116,7 +116,6 @@ export const getToken = (dataUser) => async (dispatch) => {
       throw new Error(response.status)
     }
   } catch (e) {
-    console.error(`Произошла ошибка ${e.message}`)
     dispatch(errWork())
   }
 }
@@ -137,7 +136,6 @@ export const getAllOfsetArticles = () => async (dispatch, getState) => {
       throw new Error(response.status)
     }
   } catch (e) {
-    console.error(`Произошла ошибка ${e.message}`)
     dispatch(errWork())
   }
 }
@@ -155,7 +153,6 @@ export const getArticle = () => async (dispatch, getState) => {
       throw new Error(response.status)
     }
   } catch (e) {
-    console.error(`Произошла ошибка ${e.message}`)
     dispatch(errWork())
   }
 }
@@ -193,7 +190,6 @@ export const articleEdit = (article, slugId) => async (dispatch) => {
       throw new Error(response.status)
     }
   } catch (e) {
-    console.error(`Произошла ошибка ${e.message}`)
     dispatch(errWork())
   }
 }
@@ -212,7 +208,6 @@ export const articleDelete = (slug) => async (dispatch) => {
       throw new Error(response.status)
     }
   } catch (e) {
-    console.error(`Произошла ошибка ${e.message}`)
     dispatch(errWork())
   }
 }
@@ -231,7 +226,6 @@ export const getEditedProfile = () => async (dispatch) => {
       throw new Error(response.status)
     }
   } catch (e) {
-    console.error(`Произошла ошибка ${e.message}`)
     dispatch(errWork())
   }
 }
@@ -252,7 +246,6 @@ export const editProfile = (data) => async (dispatch) => {
       throw new Error(response.status)
     }
   } catch (e) {
-    console.error(`Произошла ошибка ${e.message}`)
     dispatch(errWork())
   }
 }
@@ -272,7 +265,6 @@ export const estimateArticle = (slug) => async (dispatch) => {
       throw new Error(response.status)
     }
   } catch (e) {
-    console.error(`Произошла ошибка ${e.message}`)
     dispatch(errWork())
   }
 }

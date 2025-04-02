@@ -7,8 +7,6 @@ import * as actions from '../../actions'
 import s from './alertMessage.module.css'
 
 function AlertMessage({ err }) {
-  console.log(9, axios.isAxiosError(err))
-
   let mes = ''
   if (axios.isAxiosError(err)) {
     // const key = Object.keys(err.response.data.errors)
@@ -17,7 +15,7 @@ function AlertMessage({ err }) {
     // const value = err.response.data.errors[key]
 
     mes = array.map((x) => x.join(' '))
-    console.log(33, array)
+
     // if (err.data.errors['email or password'] === 'is invalid') {
     //     mes = 'Не верный адресс почты или пароль'
     //    }

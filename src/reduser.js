@@ -29,7 +29,7 @@ const rootReducer = (state = initialState, action = {}) => {
     case 'CLICK_EDIT_ARTICLE':
       return { ...state, onEdit: true }
     case 'DEL_EDIT_ARTICLE':
-      return { ...state, onEdit: false }
+      return { ...state, onEdit: false, article: null }
     case 'PAGINATION':
       return { ...state, currentPage: action.payload, offset: action.offset }
     case 'GET_ARTICLES_COUNT':
@@ -51,7 +51,18 @@ const rootReducer = (state = initialState, action = {}) => {
       return { ...state, user: JSON.parse(window.sessionStorage.getItem('currentUser')) }
     case 'LOG_OUT':
       window.sessionStorage.removeItem('currentUser')
-      return { ...state, user: null, isAuthor: false }
+      return {
+        ...state,
+        user: null,
+        isAuthor: false,
+        favoriteArticle: null,
+
+        articles: state.articles.map((article) => {
+          article.favorited = false
+          article.new = false
+          return article
+        }),
+      }
     case 'FETCH_SUCCESS':
       return {
         ...state,
